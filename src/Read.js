@@ -9,6 +9,7 @@ class Read extends React.Component{
            books={this.props.books}
            setWantToRead={this.props.onSetWantToRead}
            setCurrentlyReading={this.props.onSetCurrentlyReading}
+           defaultValue="read"
            />
         )
     }

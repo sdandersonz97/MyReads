@@ -34,6 +34,7 @@ render(){
                     setWantToRead={this.props.onSetWantToRead}
                     setCurrentlyReading={this.props.onSetCurrentlyReading}
                     setRead={this.props.onSetRead}
+                    defaultValue="none"
                     />
                 </div>
           </div>

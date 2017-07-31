@@ -20,6 +20,7 @@ class Library extends React.Component{
     }
 
     render(){
+        
         return(
              <div className="bookshelf">
                 
@@ -33,7 +34,7 @@ class Library extends React.Component{
                                     <div className="book-top">
                                         <div className="book-cover" style={{ width: 128, height: 192, backgroundImage:`url(${book.imageLinks.thumbnail})`  }}></div>
                                         <div className="book-shelf-changer">
-                                            <select  onChange={(event)=>this.onSelectChange(event,book)}>
+                                            <select  onChange={(event)=>this.onSelectChange(event,book)} value={this.props.defaultValue}>
                                                 <option value="none" disabled>Move to...</option>
                                                 <option value="none">None</option>
                                                 <option value="currentlyReading">Currently Reading</option>

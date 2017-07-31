@@ -10,6 +10,7 @@ return(
     books={this.props.books}
     setWantToRead={this.props.onSetWantToRead}
     setRead={this.props.onSetRead}
+    defaultValue="curretlyReading"
     />
         
 
