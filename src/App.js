@@ -22,11 +22,16 @@ class BooksApp extends React.Component {
    
   }
   setQuery = (query) =>{
+    if(query !==""){
     BooksAPI.search(query,10).then(books=>{
+      if(books.length > 1){
       this.setState({
         books:books
       })
+      }
     })
+    }
+    this.setState({books:[]})
   }
   setSearchPage = () =>{
     this.setState({
