@@ -1,9 +1,9 @@
 import React from 'react'
 import * as BooksAPI from './BooksAPI'
 import './App.css'
-import Read from './Read.js'
-import WantToRead from './WantToRead'
-import CurrentlyReading from './CurrentlyReading'
+import {Read} from './Read.js'
+import {WantToRead} from './WantToRead'
+import {CurrentlyReading} from './CurrentlyReading'
 import SearchBooks from './SearchBooks'
 
 class BooksApp extends React.Component {
@@ -22,7 +22,7 @@ class BooksApp extends React.Component {
    
   }
   setQuery = (query) =>{
-    if(query !==""){
+    if(query){
     BooksAPI.search(query,10).then(books=>{
       if(books.length > 1){
       this.setState({
@@ -31,7 +31,10 @@ class BooksApp extends React.Component {
       }
     })
     }
+  else{
     this.setState({books:[]})
+  }
+    
   }
   setSearchPage = () =>{
     this.setState({

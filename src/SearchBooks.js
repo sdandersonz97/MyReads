@@ -23,7 +23,7 @@ render(){
                     <a className="close-search" onClick={() => this.props.onSetSearchPage()}>Close</a>
                     <div className="search-books-input-wrapper">
               
-                    <input type="text" placeholder="Search by title or author" value={this.state.query} onChange={(event)=>this.handleChange(event)}/>
+                        <input type="text" placeholder="Search by title or author" value={this.state.query} onChange={(event)=>this.handleChange(event)}/>
                 
                     </div>
                 </div>

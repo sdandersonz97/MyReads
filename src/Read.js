@@ -1,18 +1,16 @@
 import React,{Component} from  'react'
 import Library from './Library'
-class Read extends React.Component{
+
+export const Read = (props) => {
     
-    render(){
         return(
            <Library
            name="Read"
-           books={this.props.books}
-           setWantToRead={this.props.onSetWantToRead}
-           setCurrentlyReading={this.props.onSetCurrentlyReading}
+           books={props.books}
+           setWantToRead={props.onSetWantToRead}
+           setCurrentlyReading={props.onSetCurrentlyReading}
            defaultValue="read"
            />
         )
-    }
+    
 }
-
-export default Read
