@@ -5,6 +5,8 @@ import {Read} from './Read.js'
 import {WantToRead} from './WantToRead'
 import {CurrentlyReading} from './CurrentlyReading'
 import SearchBooks from './SearchBooks'
+import {Route} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
 class BooksApp extends React.Component {
   constructor(){
@@ -17,23 +19,16 @@ class BooksApp extends React.Component {
       showSearchPage: true
     }
   }
-
-  componentDidMount(){
-   
-  }
   setQuery = (query) =>{
     if(query){
-    BooksAPI.search(query,10).then(books=>{
-      if(books.length > 1){
-      this.setState({
-        books:books
+      BooksAPI.search(query,10).then(books=>{
+        if(books.length > 1){
+          this.setState({
+            books:books
+          })
+        }
       })
-      }
-    })
     }
-  else{
-    this.setState({books:[]})
-  }
     
   }
   setSearchPage = () =>{
@@ -71,40 +66,47 @@ class BooksApp extends React.Component {
   render() {
     return (
       <div className="app">
-        {this.state.showSearchPage ? (
-        <SearchBooks
-        books={this.state.books}
-        onSearchQuery={this.setQuery}
-        onSetSearchPage={this.setSearchPage}
-        onSetWantToRead={this.setWantToRead}
-        onSetRead={this.setRead}
-        onSetCurrentlyReading={this.setCurrentlyReading}
+        <Route exact path="/" render={()=>(
+          <SearchBooks
+            books={this.state.books}
+            onSearchQuery={this.setQuery}
+            onSetSearchPage={this.setSearchPage}
+            onSetWantToRead={this.setWantToRead}
+            onSetRead={this.setRead}
+            onSetCurrentlyReading={this.setCurrentlyReading}
+          />
+          )}
         />
-        ):(
+        
+        <Route path="/library" render={()=>(
           <div>
-        <CurrentlyReading 
-          books={this.state.currentlyReading}
-          onSetWantToRead={this.setWantToRead}
-          onSetRead={this.setRead}
-          onSetCurrentlyReading={this.setCurrentlyReading}
-        />
-        <WantToRead
-        books={this.state.wantToRead}
-        onSetCurrentlyReading={this.setCurrentlyReading}
-        onSetRead={this.setRead}
-        onSetWantToRead={this.setWantToRead}
-        />
-        <Read 
-          books={this.state.read}
-          onSetWantToRead={this.setWantToRead}
-          onSetCurrentlyReading={this.setCurrentlyReading}
-          onSetRead={this.setRead}
-        />
-         <div className="open-search">
-              <a onClick={() => this.setState({ showSearchPage: true })}>Add a book</a>
+            <div className="list-books-title">
+              <h1>MyReads</h1>
             </div>
-        </div>
-        )}
+            <CurrentlyReading 
+              books={this.state.currentlyReading}
+              onSetWantToRead={this.setWantToRead}
+              onSetRead={this.setRead}
+              onSetCurrentlyReading={this.setCurrentlyReading}
+            />
+            <WantToRead
+            books={this.state.wantToRead}
+            onSetCurrentlyReading={this.setCurrentlyReading}
+            onSetRead={this.setRead}
+            onSetWantToRead={this.setWantToRead}
+            />
+            <Read 
+              books={this.state.read}
+              onSetWantToRead={this.setWantToRead}
+              onSetCurrentlyReading={this.setCurrentlyReading}
+              onSetRead={this.setRead}
+            />
+            <div className="open-search">
+              <Link to="/">Add a book</Link>
+            </div>
+          </div>
+          )}
+        />
       </div>
         
     )

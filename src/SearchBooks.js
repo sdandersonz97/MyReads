@@ -1,4 +1,5 @@
 import React,{Component} from 'react'
+import {Link} from 'react-router-dom'
 import Library from './Library'
 
 
@@ -17,14 +18,11 @@ handleChange(event){
 }
 render(){
     return(
-            <div className="search-books">
-                {console.log(this.state.query)}
+            <div className="search-books">                
                 <div className="search-books-bar">
-                    <a className="close-search" onClick={() => this.props.onSetSearchPage()}>Close</a>
+                    <Link to="/library" className="close-search">Close</Link>
                     <div className="search-books-input-wrapper">
-              
                         <input type="text" placeholder="Search by title or author" value={this.state.query} onChange={(event)=>this.handleChange(event)}/>
-                
                     </div>
                 </div>
                 <div className="search-books-results">
