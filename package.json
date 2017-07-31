@@ -2,7 +2,6 @@
   "dependencies": {
     "prop-types": "^15.5.8",
     "react": "^15.5.4",
-    "react-debounce-input": "^3.0.0",
     "react-dom": "^15.5.4"
   },
   "devDependencies": {

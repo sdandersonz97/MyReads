@@ -1,6 +1,6 @@
 import React,{Component} from 'react'
 import Library from './Library'
-import DebounceInput from 'react-debounce-input'
+
 
 class SearchBooks extends React.Component{
 constructor(){
@@ -23,7 +23,7 @@ render(){
                     <a className="close-search" onClick={() => this.props.onSetSearchPage()}>Close</a>
                     <div className="search-books-input-wrapper">
               
-                    <DebounceInput minLength={2} debounceTimeout={300} type="text" placeholder="Search by title or author" value={this.state.query} onChange={(event)=>this.handleChange(event)}/>
+                    <input type="text" placeholder="Search by title or author" value={this.state.query} onChange={(event)=>this.handleChange(event)}/>
                 
                     </div>
                 </div>
