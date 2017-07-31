@@ -83,16 +83,19 @@ class BooksApp extends React.Component {
           books={this.state.currentlyReading}
           onSetWantToRead={this.setWantToRead}
           onSetRead={this.setRead}
+          onSetCurrentlyReading={this.setCurrentlyReading}
         />
         <WantToRead
         books={this.state.wantToRead}
         onSetCurrentlyReading={this.setCurrentlyReading}
         onSetRead={this.setRead}
+        onSetWantToRead={this.setWantToRead}
         />
         <Read 
           books={this.state.read}
           onSetWantToRead={this.setWantToRead}
           onSetCurrentlyReading={this.setCurrentlyReading}
+          onSetRead={this.setRead}
         />
          <div className="open-search">
               <a onClick={() => this.setState({ showSearchPage: true })}>Add a book</a>
