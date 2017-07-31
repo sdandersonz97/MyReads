@@ -14,16 +14,11 @@ class Library extends React.Component{
                 break
             case "none":
                 break
-        }
-            
-                         
+        }                            
     }
-
     render(){
-        
         return(
-             <div className="bookshelf">
-                
+            <div className="bookshelf">
                 <h2 className="bookshelf-title">{this.props.name}</h2>
                     <div className="bookshelf-books">
                         <ol className="books-grid">                       
@@ -40,7 +35,6 @@ class Library extends React.Component{
                                                 <option value="currentlyReading">Currently Reading</option>
                                                 <option value="wantToRead" >Want to Read</option>
                                                 <option value="read">Read</option>
-                                                
                                             </select>
                                         </div>
                                     </div>
@@ -55,5 +49,4 @@ class Library extends React.Component{
         )
     }
 }
-
 export default Library

@@ -15,26 +15,17 @@ class BooksApp extends React.Component {
       books:[],
       wantToRead:[],
       currentlyReading:[],
-      read:[],
-      showSearchPage: true
+      read:[]      
     }
   }
   setQuery = (query) =>{
     if(query){
       BooksAPI.search(query,10).then(books=>{
-        if(books.length > 1){
           this.setState({
             books:books
-          })
-        }
+          })         
       })
-    }
-    
-  }
-  setSearchPage = () =>{
-    this.setState({
-      showSearchPage:false
-    })
+    }  
   }
   setWantToRead = (book) =>{
     this.setState(state=>({
@@ -44,7 +35,6 @@ class BooksApp extends React.Component {
     }))
 
   }
-
   setRead = (book) =>{
     this.setState(state=>({
       read:state.read.concat([ book ]),
@@ -53,7 +43,6 @@ class BooksApp extends React.Component {
     }))
 
   }
-
   setCurrentlyReading = (book) =>{
     this.setState(state=>({
       currentlyReading:state.currentlyReading.concat([ book ]),
@@ -62,7 +51,6 @@ class BooksApp extends React.Component {
     }))
 
   }
-  
   render() {
     return (
       <div className="app">
@@ -77,7 +65,6 @@ class BooksApp extends React.Component {
           />
           )}
         />
-        
         <Route path="/library" render={()=>(
           <div>
             <div className="list-books-title">
@@ -107,8 +94,7 @@ class BooksApp extends React.Component {
           </div>
           )}
         />
-      </div>
-        
+      </div>  
     )
   }
 }
