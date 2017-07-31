@@ -19,11 +19,14 @@ class BooksApp extends React.Component {
   }
 
   componentDidMount(){
-    BooksAPI.getAll().then(books=>{
+   
+  }
+  setQuery = (query) =>{
+    BooksAPI.search(query,10).then(books=>{
       this.setState({
         books:books
       })
-    })  
+    })
   }
   setSearchPage = () =>{
     this.setState({
@@ -62,7 +65,12 @@ class BooksApp extends React.Component {
       <div className="app">
         {this.state.showSearchPage ? (
         <SearchBooks
+        books={this.state.books}
+        onSearchQuery={this.setQuery}
         onSetSearchPage={this.setSearchPage}
+        onSetWantToRead={this.setWantToRead}
+        onSetRead={this.setRead}
+        onSetCurrentlyReading={this.setCurrentlyReading}
         />
         ):(
           <div>

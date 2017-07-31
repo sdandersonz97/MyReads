@@ -1,29 +1,40 @@
 import React,{Component} from 'react'
-
+import Library from './Library'
+import DebounceInput from 'react-debounce-input'
 
 class SearchBooks extends React.Component{
-
-
+constructor(){
+    super();
+    this.state={
+        query:""
+    }
+}
+handleChange(event){
+    this.setState({
+        query:event.target.value
+    })
+    this.props.onSearchQuery(this.state.query)
+}
 render(){
     return(
             <div className="search-books">
+                {console.log(this.state.query)}
                 <div className="search-books-bar">
                     <a className="close-search" onClick={() => this.props.onSetSearchPage()}>Close</a>
                     <div className="search-books-input-wrapper">
-                {/* 
-                  NOTES: The search from BooksAPI is limited to a particular set of search terms.
-                  You can find these search terms here:
-                  https://github.com/udacity/reactnd-project-myreads-starter/blob/master/SEARCH_TERMS.md
-                  
-                  However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
-                  you don't find a specific author or title. Every search is limited by search terms.
-                */}
-                    <input type="text" placeholder="Search by title or author"/>
+              
+                    <DebounceInput minLength={2} debounceTimeout={300} type="text" placeholder="Search by title or author" value={this.state.query} onChange={(event)=>this.handleChange(event)}/>
                 
                     </div>
                 </div>
                 <div className="search-books-results">
-                    <ol className="books-grid"></ol>
+                    <Library
+                    name="Results"
+                    books={this.props.books}
+                    setWantToRead={this.props.onSetWantToRead}
+                    setCurrentlyReading={this.props.onSetCurrentlyReading}
+                    setRead={this.props.onSetRead}
+                    />
                 </div>
           </div>
     )
