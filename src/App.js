@@ -42,7 +42,7 @@ class BooksApp extends React.Component {
     this.setState(state=>({
       wantToRead:state.wantToRead.concat([ book ]),
       currentlyReading:state.currentlyReading.filter((c)=>c.id !==book.id),
-      books:state.books.filter((c)=>c.id !==book.id)
+      read:state.read.filter((c)=>c.id !==book.id)
     }))
 
   }
@@ -59,7 +59,7 @@ class BooksApp extends React.Component {
   setCurrentlyReading = (book) =>{
     this.setState(state=>({
       currentlyReading:state.currentlyReading.concat([ book ]),
-      books:state.books.filter((c)=>c.id !==book.id),
+      read:state.read.filter((c)=>c.id !==book.id),
       wantToRead:state.wantToRead.filter((c)=>c.id !==book.id)
     }))
 
