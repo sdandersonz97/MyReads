@@ -18,6 +18,13 @@ class BooksApp extends React.Component {
       read:[]      
     }
   }
+  componentDidMount(){
+    BooksAPI.getAll().then(books=>{
+      this.setState({
+        books:books
+      })
+    })
+  }
   setQuery = (query) =>{
     if(query){
       BooksAPI.search(query,10).then(books=>{
@@ -54,6 +61,7 @@ class BooksApp extends React.Component {
   render() {
     return (
       <div className="app">
+        {console.log(this.state.books)}
         <Route exact path="/" render={()=>(
           <SearchBooks
             books={this.state.books}
