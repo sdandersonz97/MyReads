@@ -7,15 +7,13 @@ import {CurrentlyReading} from './CurrentlyReading'
 import SearchBooks from './SearchBooks'
 import {Route} from 'react-router-dom'
 import {Link} from 'react-router-dom'
+import BookList from './BookList'
 
 class BooksApp extends React.Component {
   constructor(){
     super()
     this.state = {
-      books:[],
-      wantToRead:[],
-      currentlyReading:[],
-      read:[]      
+      books:[]    
     }
   }
   componentDidMount(){
@@ -78,23 +76,14 @@ class BooksApp extends React.Component {
             <div className="list-books-title">
               <h1>MyReads</h1>
             </div>
-            <CurrentlyReading 
-              books={this.state.currentlyReading}
-              onSetWantToRead={this.setWantToRead}
-              onSetRead={this.setRead}
-              onSetCurrentlyReading={this.setCurrentlyReading}
+            <BookList
+            books={this.state.books.filter(book=>book.shelf === 'read')}
             />
-            <WantToRead
-            books={this.state.wantToRead}
-            onSetCurrentlyReading={this.setCurrentlyReading}
-            onSetRead={this.setRead}
-            onSetWantToRead={this.setWantToRead}
+            <BookList
+            books={this.state.books.filter(book=>book.shelf === 'currentlyReading')}
             />
-            <Read 
-              books={this.state.read}
-              onSetWantToRead={this.setWantToRead}
-              onSetCurrentlyReading={this.setCurrentlyReading}
-              onSetRead={this.setRead}
+            <BookList
+            books={this.state.books.filter(book=>book.shelf === 'wantToRead')}
             />
             <div className="open-search">
               <Link to="/">Add a book</Link>
