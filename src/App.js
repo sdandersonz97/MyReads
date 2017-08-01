@@ -32,29 +32,14 @@ class BooksApp extends React.Component {
       })
     }  
   }
-  setWantToRead = (book) =>{
-    this.setState(state=>({
-      wantToRead:state.wantToRead.concat([ book ]),
-      currentlyReading:state.currentlyReading.filter((c)=>c.id !==book.id),
-      read:state.read.filter((c)=>c.id !==book.id)
-    }))
-
-  }
-  setRead = (book) =>{
-    this.setState(state=>({
-      read:state.read.concat([ book ]),
-      wantToRead:state.wantToRead.filter((c)=>c.id !==book.id),
-      currentlyReading:state.currentlyReading.filter((c)=>c.id !==book.id)
-    }))
-
-  }
-  setCurrentlyReading = (book) =>{
-    this.setState(state=>({
-      currentlyReading:state.currentlyReading.concat([ book ]),
-      read:state.read.filter((c)=>c.id !==book.id),
-      wantToRead:state.wantToRead.filter((c)=>c.id !==book.id)
-    }))
-
+  handleShelfChange=(book,newShelf)=>{
+    BooksAPI.update(book,newShelf).then(book=>{
+      BooksAPI.getAll().then(books=>{
+        this.setState({
+          books:books
+        })
+      })
+    })
   }
   render() {
     return (
@@ -77,13 +62,19 @@ class BooksApp extends React.Component {
               <h1>MyReads</h1>
             </div>
             <BookList
-            books={this.state.books.filter(book=>book.shelf === 'read')}
-            />
-            <BookList
             books={this.state.books.filter(book=>book.shelf === 'currentlyReading')}
+            onShelfChange={this.handleShelfChange}
+            name="currentlyReading"
             />
             <BookList
             books={this.state.books.filter(book=>book.shelf === 'wantToRead')}
+            onShelfChange={this.handleShelfChange}
+            name="wantToRead"
+            />
+            <BookList
+            books={this.state.books.filter(book=>book.shelf === 'read')}
+            onShelfChange={this.handleShelfChange}
+            name="Read"
             />
             <div className="open-search">
               <Link to="/">Add a book</Link>

@@ -2,19 +2,9 @@ import React,{Component} from 'react'
 
 class BookList extends React.Component{
     onSelectChange = (event,book) => {
-        switch(event.target.value){
-            case "wantToRead":
-                this.props.setWantToRead(book)
-                break
-            case "read":
-                this.props.setRead(book)
-                break
-            case "currentlyReading":
-                this.props.setCurrentlyReading(book)                
-                break
-            case "none":
-                break
-        }                            
+        const shelf = event.target.value
+        this.props.onShelfChange(book,shelf)
+                     
     }
     render(){
         return(
