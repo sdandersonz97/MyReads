@@ -1,7 +1,6 @@
 import React from 'react'
 import * as BooksAPI from './BooksAPI'
 import './App.css'
-
 import SearchBooks from './SearchBooks'
 import {Route} from 'react-router-dom'
 import {Link} from 'react-router-dom'
@@ -33,7 +32,6 @@ class BooksApp extends React.Component {
   render() {
     return (
       <div className="app">
-        {console.log(this.state.books)}
         <Route path="/search" render={()=>(
           <SearchBooks
             onShelfChange={this.handleShelfChange}
@@ -47,19 +45,19 @@ class BooksApp extends React.Component {
               <h1>MyReads</h1>
             </div>
             <BookList
-            books={this.state.books.filter(book=>book.shelf === 'currentlyReading')}
-            onShelfChange={this.handleShelfChange}
-            name="Currently Reading"
+              books={this.state.books.filter(book=>book.shelf === 'currentlyReading')}
+              onShelfChange={this.handleShelfChange}
+              name="Currently Reading"
             />
             <BookList
-            books={this.state.books.filter(book=>book.shelf === 'wantToRead')}
-            onShelfChange={this.handleShelfChange}
-            name="Want To Read"
+              books={this.state.books.filter(book=>book.shelf === 'wantToRead')}
+              onShelfChange={this.handleShelfChange}
+              name="Want To Read"
             />
             <BookList
-            books={this.state.books.filter(book=>book.shelf === 'read')}
-            onShelfChange={this.handleShelfChange}
-            name="Read"
+              books={this.state.books.filter(book=>book.shelf === 'read')}
+              onShelfChange={this.handleShelfChange}
+              name="Read"
             />
             <div className="open-search">
               <Link to="/search">Add a book</Link>
@@ -71,5 +69,4 @@ class BooksApp extends React.Component {
     )
   }
 }
-
 export default BooksApp

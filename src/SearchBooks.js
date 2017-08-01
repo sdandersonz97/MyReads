@@ -1,7 +1,8 @@
 import React,{Component} from 'react'
 import {Link} from 'react-router-dom'
-import * as BooksAPI from './BooksAPI'
 import BookList from './BookList'
+import * as BooksAPI from './BooksAPI'
+
 class SearchBooks extends React.Component{
     constructor(){
         super();
@@ -31,7 +32,6 @@ class SearchBooks extends React.Component{
         })
     }
     render(){
-        
         return(
                 <div className="search-books">            
                     <div className="search-books-bar">
