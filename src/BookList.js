@@ -19,7 +19,7 @@ class BookList extends React.Component{
                                     <div className="book-top">
                                         <div className="book-cover" style={{ width: 128, height: 192, backgroundImage:`url(${book.imageLinks.thumbnail})`  }}></div>
                                         <div className="book-shelf-changer">
-                                            <select  onChange={(event)=>this.onSelectChange(event,book)} value={this.props.defaultValue}>
+                                            <select  onChange={(event)=>this.onSelectChange(event,book)} value={book.shelf}>
                                                 <option value="none" disabled>Move to...</option>
                                                 <option value="none">None</option>
                                                 <option value="currentlyReading">Currently Reading</option>

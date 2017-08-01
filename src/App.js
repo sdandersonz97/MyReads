@@ -1,9 +1,7 @@
 import React from 'react'
 import * as BooksAPI from './BooksAPI'
 import './App.css'
-import {Read} from './Read.js'
-import {WantToRead} from './WantToRead'
-import {CurrentlyReading} from './CurrentlyReading'
+
 import SearchBooks from './SearchBooks'
 import {Route} from 'react-router-dom'
 import {Link} from 'react-router-dom'
@@ -23,15 +21,6 @@ class BooksApp extends React.Component {
       })
     })
   }
-  setQuery = (query) =>{
-    if(query){
-      BooksAPI.search(query,10).then(books=>{
-          this.setState({
-            books:books
-          })         
-      })
-    }  
-  }
   handleShelfChange=(book,newShelf)=>{
     BooksAPI.update(book,newShelf).then(book=>{
       BooksAPI.getAll().then(books=>{
@@ -47,16 +36,12 @@ class BooksApp extends React.Component {
         {console.log(this.state.books)}
         <Route path="/search" render={()=>(
           <SearchBooks
+            onShelfChange={this.handleShelfChange}
             books={this.state.books}
-            onSearchQuery={this.setQuery}
-            onSetSearchPage={this.setSearchPage}
-            onSetWantToRead={this.setWantToRead}
-            onSetRead={this.setRead}
-            onSetCurrentlyReading={this.setCurrentlyReading}
           />
           )}
         />
-        <Route path="/" render={()=>(
+        <Route exact path="/" render={()=>(
           <div>
             <div className="list-books-title">
               <h1>MyReads</h1>
@@ -64,12 +49,12 @@ class BooksApp extends React.Component {
             <BookList
             books={this.state.books.filter(book=>book.shelf === 'currentlyReading')}
             onShelfChange={this.handleShelfChange}
-            name="currentlyReading"
+            name="Currently Reading"
             />
             <BookList
             books={this.state.books.filter(book=>book.shelf === 'wantToRead')}
             onShelfChange={this.handleShelfChange}
-            name="wantToRead"
+            name="Want To Read"
             />
             <BookList
             books={this.state.books.filter(book=>book.shelf === 'read')}
@@ -77,7 +62,7 @@ class BooksApp extends React.Component {
             name="Read"
             />
             <div className="open-search">
-              <Link to="/">Add a book</Link>
+              <Link to="/search">Add a book</Link>
             </div>
           </div>
           )}
