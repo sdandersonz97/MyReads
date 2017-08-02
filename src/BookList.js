@@ -4,8 +4,7 @@ import PropTypes from 'prop-types'
 class BookList extends React.Component{
     onSelectChange = (event,book) => {
         const shelf = event.target.value
-        this.props.onShelfChange(book,shelf)
-                     
+        this.props.onShelfChange(book,shelf)              
     }
     render(){
         return(
@@ -15,7 +14,6 @@ class BookList extends React.Component{
                         <ol className="books-grid">                       
                             {this.props.books.map((book,index)=>{return(
                                 <li key={index}>
-                            
                                 <div className="book">
                                     <div className="book-top">
                                         <div className="book-cover" style={{ width: 128, height: 192, backgroundImage:`url(${book.imageLinks.thumbnail})`  }}></div>

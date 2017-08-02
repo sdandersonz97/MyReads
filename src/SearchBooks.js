@@ -33,7 +33,6 @@ class SearchBooks extends React.Component{
         })
     }
     render(){
-
         return(
                 <div className="search-books">            
                     <div className="search-books-bar">
