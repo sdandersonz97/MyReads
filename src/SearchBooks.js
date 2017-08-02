@@ -36,6 +36,8 @@ class SearchBooks extends React.Component{
     }
     ShelfChange = (bookOnChange,shelf) =>{
         const {booksInSearchResult} = this.state  
+        const {onShelfChange} = this.props
+        onShelfChange(bookOnChange,shelf)
         this.setState(state=>{
             let newBooks = booksInSearchResult.map(bookInSearchResult=>{
                 if (bookInSearchResult.id === bookOnChange.id){
@@ -47,7 +49,6 @@ class SearchBooks extends React.Component{
         })
     }
     render(){
-        const {onShelfChange} = this.props
         const {query, booksInSearchResult} = this.state
         return(
                 <div className="search-books">            
@@ -61,8 +62,7 @@ class SearchBooks extends React.Component{
                         <BookList
                             name="Results"
                             books={booksInSearchResult}
-                            onShelfChange={onShelfChange}
-                            onShelfChangeInSearch={this.ShelfChange}
+                            onShelfChange={this.ShelfChange}
                         />
                     </div>
             </div>

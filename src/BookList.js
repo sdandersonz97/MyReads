@@ -8,9 +8,7 @@ class BookList extends React.Component{
         const {onShelfChange,onShelfChangeInSearch} = this.props
         const shelf = event.target.value
         onShelfChange(book,shelf)
-        if(onShelfChangeInSearch){
-            onShelfChangeInSearch(book,shelf)
-        }              
+                    
     }
     render(){
         const {shelfName,books} = this.props
