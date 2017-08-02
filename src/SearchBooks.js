@@ -13,28 +13,31 @@ class SearchBooks extends React.Component{
         }
     }
     handleChange(event){
+        const {query} = this.state
+        const {booksOnHomePage} = this.props
         this.setState({
             query:event.target.value
         })
-        BooksAPI.search(this.state.query,10).then(booksInSearchResult=>{
+        BooksAPI.search(query,10).then(booksInSearchResult=>{
             if(booksInSearchResult){
                 booksInSearchResult.map(bookInSearchResult => {
                 bookInSearchResult.shelf="none"
-                    this.props.booksOnHomePage.map(bookOnHomePage => {
-                            if (bookInSearchResult.id === bookOnHomePage.id){
+                    booksOnHomePage.map(bookOnHomePage => {
+                        if (bookInSearchResult.id === bookOnHomePage.id){
                                 bookInSearchResult.shelf = bookOnHomePage.shelf
-                            }
-                        })
+                        }
                     })
+                })
                 this.setState({
                     booksInSearchResult:booksInSearchResult
                 })
             } 
         })
     }
-    ShelfChange = (bookOnChange,shelf) =>{    
+    ShelfChange = (bookOnChange,shelf) =>{
+        const {booksInSearchResult} = this.state  
         this.setState(state=>{
-            let newBooks = this.state.booksInSearchResult.map(bookInSearchResult=>{
+            let newBooks = booksInSearchResult.map(bookInSearchResult=>{
                 if (bookInSearchResult.id === bookOnChange.id){
                     bookInSearchResult.shelf = shelf
                 }

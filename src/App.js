@@ -31,8 +31,8 @@ class BooksApp extends React.Component {
     return is
   }
   handleShelfChange=(bookOnChange,shelf)=>{
-      if(!this.isTheBookNew(bookOnChange)){
-        this.setState(state=>{
+    if(!this.isTheBookNew(bookOnChange)){
+      this.setState(state=>{
         let newBooks = state.books.map(book => {
           if(bookOnChange.id === book.id){
             book.shelf = shelf
@@ -41,8 +41,7 @@ class BooksApp extends React.Component {
         })
         return {books:newBooks}
       })
-      }
-
+    }
     BooksAPI.update(bookOnChange,shelf)
   }
   render() {
@@ -52,9 +51,9 @@ class BooksApp extends React.Component {
         <Route path="/search" render={()=>(
           <SearchBooks
             onShelfChange={this.handleShelfChange}
-            booksOnHomePage={this.state.books}
+            booksOnHomePage={books}
           />
-          )}
+        )}
         />
         <Route exact path="/" render={()=>(
           <div>

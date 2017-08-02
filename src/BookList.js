@@ -5,11 +5,11 @@ import PropTypes from 'prop-types'
 class BookList extends React.Component{
     
     selectChange = (event,book) => {
-        
+        const {onShelfChange,onShelfChangeInSearch} = this.props
         const shelf = event.target.value
-        this.props.onShelfChange(book,shelf)
-        if(this.props.onShelfChangeInSearch){
-            this.props.onShelfChangeInSearch(book,shelf)
+        onShelfChange(book,shelf)
+        if(onShelfChangeInSearch){
+            onShelfChangeInSearch(book,shelf)
         }              
     }
     render(){
