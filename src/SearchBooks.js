@@ -33,7 +33,7 @@ class SearchBooks extends React.Component{
         })
     }
     ShelfChange = (bookOnChange,shelf) =>{
-        this.props.onShelfChange(bookOnChange,shelf)
+        
         this.setState(state=>{
             let newBooks = this.state.booksInSearchResult.map(bookInSearchResult=>{
             if (bookInSearchResult.id === bookOnChange.id){
@@ -43,6 +43,9 @@ class SearchBooks extends React.Component{
         })
         return {booksInSearchResult:newBooks}
         })
+    
+            
+        
     }
     render(){
         return(
@@ -57,7 +60,8 @@ class SearchBooks extends React.Component{
                         <BookList
                             name="Results"
                             books={this.state.booksInSearchResult}
-                            onShelfChange={this.ShelfChange}
+                            onShelfChange={this.props.onShelfChange}
+                            onShelfChangeInSearch={this.ShelfChange}
                         />
                     </div>
             </div>
