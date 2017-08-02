@@ -20,19 +20,33 @@ class BooksApp extends React.Component {
       })
     })
   }
-  handleShelfChange=(bookOnChange,shelf)=>{
-    this.setState(state=>{
-      let newBooks = state.books.map(book => {
-        if(bookOnChange.id === book.id){
-          book.shelf = shelf
-        }
-        return book
+  isTheBookNew=(bookOnChange)=>{
+    let is = false
+    if(bookOnChange.shelf === "none"){
+      this.setState(state=>{
+        books:state.books.push(bookOnChange)
       })
-      return {books:newBooks}
-    })
+      is = true
+    }
+    return is
+  }
+  handleShelfChange=(bookOnChange,shelf)=>{
+      if(!this.isTheBookNew(bookOnChange)){
+        this.setState(state=>{
+        let newBooks = state.books.map(book => {
+          if(bookOnChange.id === book.id){
+            book.shelf = shelf
+          }
+          return book
+        })
+        return {books:newBooks}
+      })
+      }
+
     BooksAPI.update(bookOnChange,shelf)
   }
   render() {
+    const {books} = this.state
     return (
       <div className="app">
         <Route path="/search" render={()=>(
@@ -48,17 +62,17 @@ class BooksApp extends React.Component {
               <h1>MyReads</h1>
             </div>
             <BookList
-              books={this.state.books.filter(book=>book.shelf === 'currentlyReading')}
+              books={books.filter(book=>book.shelf === 'currentlyReading')}
               onShelfChange={this.handleShelfChange}
               shelfName="Currently Reading"
             />
             <BookList
-              books={this.state.books.filter(book=>book.shelf === 'wantToRead')}
+              books={books.filter(book=>book.shelf === 'wantToRead')}
               onShelfChange={this.handleShelfChange}
               shelfName="Want To Read"
             />
             <BookList
-              books={this.state.books.filter(book=>book.shelf === 'read')}
+              books={books.filter(book=>book.shelf === 'read')}
               onShelfChange={this.handleShelfChange}
               shelfName="Read"
             />

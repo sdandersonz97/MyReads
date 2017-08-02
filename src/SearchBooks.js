@@ -32,35 +32,33 @@ class SearchBooks extends React.Component{
             } 
         })
     }
-    ShelfChange = (bookOnChange,shelf) =>{
-        
+    ShelfChange = (bookOnChange,shelf) =>{    
         this.setState(state=>{
             let newBooks = this.state.booksInSearchResult.map(bookInSearchResult=>{
-            if (bookInSearchResult.id === bookOnChange.id){
-                bookInSearchResult.shelf = shelf
-            }
-            return bookInSearchResult
-        })
+                if (bookInSearchResult.id === bookOnChange.id){
+                    bookInSearchResult.shelf = shelf
+                }
+                return bookInSearchResult
+            })
         return {booksInSearchResult:newBooks}
         })
-    
-            
-        
     }
     render(){
+        const {onShelfChange} = this.props
+        const {query, booksInSearchResult} = this.state
         return(
                 <div className="search-books">            
                     <div className="search-books-bar">
                         <Link to="/" className="close-search">Close</Link>
                         <div className="search-books-input-wrapper">
-                            <input type="text" placeholder="Search by title or author" value={this.state.query} onChange={(event)=>this.handleChange(event)}/>
+                            <input type="text" placeholder="Search by title or author" value={query} onChange={(event)=>this.handleChange(event)}/>
                         </div>
                     </div>
                     <div className="search-books-results">
                         <BookList
                             name="Results"
-                            books={this.state.booksInSearchResult}
-                            onShelfChange={this.props.onShelfChange}
+                            books={booksInSearchResult}
+                            onShelfChange={onShelfChange}
                             onShelfChangeInSearch={this.ShelfChange}
                         />
                     </div>
