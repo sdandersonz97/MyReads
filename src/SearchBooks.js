@@ -32,6 +32,18 @@ class SearchBooks extends React.Component{
             } 
         })
     }
+    ShelfChange = (bookOnChange,shelf) =>{
+        this.props.onShelfChange(bookOnChange,shelf)
+        this.setState(state=>{
+            let newBooks = this.state.booksInSearchResult.map(bookInSearchResult=>{
+            if (bookInSearchResult.id === bookOnChange.id){
+                bookInSearchResult.shelf = shelf
+            }
+            return bookInSearchResult
+        })
+        return {booksInSearchResult:newBooks}
+        })
+    }
     render(){
         return(
                 <div className="search-books">            
@@ -43,9 +55,9 @@ class SearchBooks extends React.Component{
                     </div>
                     <div className="search-books-results">
                         <BookList
-                        name="Results"
-                        books={this.state.booksInSearchResult}
-                        onShelfChange={this.props.onShelfChange}
+                            name="Results"
+                            books={this.state.booksInSearchResult}
+                            onShelfChange={this.ShelfChange}
                         />
                     </div>
             </div>
