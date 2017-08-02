@@ -28,7 +28,7 @@ class BooksApp extends React.Component {
         }
         return book
       })
-      return {book:newBooks}
+      return {books:newBooks}
     })
     BooksAPI.update(bookOnChange,shelf)
   }
@@ -39,7 +39,7 @@ class BooksApp extends React.Component {
         <Route path="/search" render={()=>(
           <SearchBooks
             onShelfChange={this.handleShelfChange}
-            homePagebooks={this.state.books}
+            booksOnHomePage={this.state.books}
           />
           )}
         />

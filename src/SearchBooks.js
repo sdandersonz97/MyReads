@@ -9,30 +9,31 @@ class SearchBooks extends React.Component{
         super();
         this.state={
             query:"",
-            books:[]
+            booksInSearchResult:[]
         }
     }
     handleChange(event){
         this.setState({
             query:event.target.value
         })
-        BooksAPI.search(this.state.query,10).then(books=>{
-            if(books){
-                books.map(bookInSearchResult => {
+        BooksAPI.search(this.state.query,10).then(booksInSearchResult=>{
+            if(booksInSearchResult){
+                booksInSearchResult.map(bookInSearchResult => {
                 bookInSearchResult.shelf="none"
-                    this.props.homePageBooks.map(bookOnHomePage => {
+                    this.props.booksOnHomePage.map(bookOnHomePage => {
                             if (bookInSearchResult.id === bookOnHomePage.id){
                                 bookInSearchResult.shelf = bookOnHomePage.shelf
                             }
                         })
                     })
                 this.setState({
-                    books:books
+                    booksInSearchResult:booksInSearchResult
                 })
             } 
         })
     }
     render(){
+
         return(
                 <div className="search-books">            
                     <div className="search-books-bar">
@@ -44,7 +45,7 @@ class SearchBooks extends React.Component{
                     <div className="search-books-results">
                         <BookList
                         name="Results"
-                        books={this.state.books}
+                        books={this.state.booksInSearchResult}
                         onShelfChange={this.props.onShelfChange}
                         />
                     </div>
