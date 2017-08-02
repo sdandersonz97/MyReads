@@ -22,16 +22,18 @@ To run the server :
 `BookList.js` recieve as props:
 ### `name`
 * Header to display as title
-
+### `books[]`
+* All books get with getAll()
 ### `onShelfChange(book,shelf)`
 * The update method for the API provided
 
 `searchBooks.js` recieve as props:
 ### `name`
 * Header to display as title
-
 ### `homePageBooks[]`
 * All books on your home pages
+### `onShelfChange(book,shelf)`
+* The update method for the API provided
 
 ## Backend Server
 

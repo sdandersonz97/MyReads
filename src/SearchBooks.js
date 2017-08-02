@@ -2,6 +2,7 @@ import React,{Component} from 'react'
 import {Link} from 'react-router-dom'
 import BookList from './BookList'
 import * as BooksAPI from './BooksAPI'
+import PropTypes from 'prop-types'
 
 class SearchBooks extends React.Component{
     constructor(){
@@ -19,7 +20,7 @@ class SearchBooks extends React.Component{
             if(books){
                 books.map(bookInSearchResult => {
                 bookInSearchResult.shelf="none"
-                    this.props.books.map(bookOnHomePage => {
+                    this.props.homePageBooks.map(bookOnHomePage => {
                             if (bookInSearchResult.id === bookOnHomePage.id){
                                 bookInSearchResult.shelf = bookOnHomePage.shelf
                             }
@@ -51,4 +52,11 @@ class SearchBooks extends React.Component{
         )
     }
 }
+
+SearchBooks.PropTypes={
+    homePageBooks: PropTypes.array,
+    onShelfChange: PropTypes.func
+}
+
 export default SearchBooks
+
