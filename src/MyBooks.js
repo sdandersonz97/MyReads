@@ -1,6 +1,10 @@
 import React from "react";
 import BookList from './BookList';
+import * as BooksAPI from "./BooksAPI";
+import { addNewBook, changeShelfOfBook } from './stateChanges';
 import { filterByShelf, shelfs } from './utils/helpers';
+import { Link } from 'react-router-dom';
+
 class MyBooks extends React.Component {
     state = { books: [] };
     componentDidMount() {
@@ -22,6 +26,7 @@ class MyBooks extends React.Component {
       BooksAPI.update(bookOnChange, shelf);
     };
     render(){
+        const { books } = this.state
         return(
             <div>
                 <div className="list-books-title">
