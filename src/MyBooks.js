@@ -28,7 +28,7 @@ class MyBooks extends React.Component {
     render(){
         const { books } = this.state
         return(
-            <div>
+            <div className='bg-classic'>
                 <div className="list-books-title">
                 <h1>MyReads</h1>
                 </div>
