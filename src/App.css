@@ -172,3 +172,38 @@ body, .app {
   text-align: center;
   font-size: 0.8em;
 }
+.bg-image {
+  background-image: url('./img/bg.jpg');
+  height: 100vh;
+  background-repeat: norepeat;
+  background-size: cover;
+  background-position: center center;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.bg-classic {
+  background-color: rgb(170, 216, 247);
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; 
+}
+.title {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  color: white;
+  text-transform: uppercase;
+  margin: 0;
+  font-size: 4rem;
+  padding: 15px;
+  background-color: rgba(128, 128, 128, 0.19);
+  border-radius: 16px;
+  text-align: center;
+}
+a{
+  text-decoration: none;
+  color: rgb(1, 57, 179)
+}
