@@ -4,6 +4,7 @@ import "./App.css";
 import SearchBooks from "./SearchBooks";
 import { Route } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { filterByShelf } from './utils/helpers';
 import BookList from "./BookList";
 
 class BooksApp extends React.Component {
@@ -61,17 +62,17 @@ class BooksApp extends React.Component {
                 <h1>MyReads</h1>
               </div>
               <BookList
-                books={books.filter(book => book.shelf === "currentlyReading")}
+                books={filterByShelf(books,'currentlyReading')}
                 onShelfChange={this.handleShelfChange}
                 shelfName="Currently Reading"
               />
               <BookList
-                books={books.filter(book => book.shelf === "wantToRead")}
+                books={filterByShelf(books,'wantToRead')}
                 onShelfChange={this.handleShelfChange}
                 shelfName="Want To Read"
               />
               <BookList
-                books={books.filter(book => book.shelf === "read")}
+                books={filterByShelf(books,'read')}
                 onShelfChange={this.handleShelfChange}
                 shelfName="Read"
               />
