@@ -15,32 +15,32 @@ class MyBooks extends React.Component {
     isTheBookNew = bookOnChange => {
       let is = false;
       if (bookOnChange.shelf === "none") {
-        this.setState(state => addNewBook(state, bookOnChange))
+        this.setState(addNewBook(bookOnChange))
         is = true;
       }
       return is;
     };
     handleShelfChange = (bookOnChange, shelf) => {
       !this.isTheBookNew(bookOnChange) &&
-        this.setState(state => changeShelfOfBook(state, bookOnChange, shelf));
+        this.setState(changeShelfOfBook(bookOnChange, shelf));
       BooksAPI.update(bookOnChange, shelf);
     };
     render(){
         const { books } = this.state
         return(
-            <div className='bg-classic'>
+            <section>
                 <div className="list-books-title">
                 <h1>MyReads</h1>
                 </div>
                 {shelfs.map(shelf => 
-                <BookList 
-                    books={filterByShelf(books, shelf.shelfId)}
-                    onShelfChange={this.handleShelfChange}
-                    shelfName={shelf.shelfTitle} />)}
+                  <BookList 
+                      books={filterByShelf(books, shelf.shelfId)}
+                      onShelfChange={this.handleShelfChange}
+                      shelfName={shelf.shelfTitle} />)}
                 <div className="open-search">
                 <Link to="/search">Add a book</Link>
                 </div>
-            </div>
+            </section>
         )
     }
 }
