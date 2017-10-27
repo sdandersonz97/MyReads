@@ -7,33 +7,12 @@ This is MyReads project: A bookshelf app that allows you to select and categoriz
 To run this app clone this Repo with :
 `git clone https://github.com/sdandersonz97/MyReads.git`
 
-MyReads Need the following packages:
-* [react-router-dom](https://github.com/ReactTraining/react-router/tree/master/packages/react-router-dom)
-* [prop-types](https://facebook.github.io/react/docs/typechecking-with-proptypes.html)
-
 For install all the packages run :
 `npm install`
 
 To run the server :
 `npm start`
     
-
-## Components
-`BookList.js` recieve as props:
-### `name`
-* Header to display as title
-### `books[]`
-* All books get with getAll()
-### `onShelfChange(book,shelf)`
-* The update method for the API provided
-
-`searchBooks.js` recieve as props:
-### `name`
-* Header to display as title
-### `homePageBooks[]`
-* All books on your home pages
-### `onShelfChange(book,shelf)`
-* The update method for the API provided
 
 ## Backend Server
 
