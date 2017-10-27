@@ -11,17 +11,14 @@ class BooksApp extends React.Component {
   state = { books: [] };
   componentDidMount() {
     BooksAPI.getAll().then(books =>
-      this.setState({
-        books
-      })
+      this.setState({ books })
     );
   }
+  addBookToState = newBook => this.setState(state => { books: state.books.push(newBook) });
   isTheBookNew = bookOnChange => {
     let is = false;
     if (bookOnChange.shelf === "none") {
-      this.setState(state => {
-        books: state.books.push(bookOnChange);
-      });
+      this.addBookToState(bookOnChange)
       is = true;
     }
     return is;
