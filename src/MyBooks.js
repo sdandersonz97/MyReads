@@ -32,6 +32,7 @@ class MyBooks extends React.Component {
     onBack = () => this.setState({ isSearching: false })
     render(){
         const { books, isSearching } = this.state
+        console.log('s')
         return(
             <section>
                 {!isSearching 

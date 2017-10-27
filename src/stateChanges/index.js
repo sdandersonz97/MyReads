@@ -9,3 +9,13 @@ export const changeShelfOfBook = (onChangeBook, shelf) => state => {
     });
     return { books: newBooks };
 }
+
+export const changeShelfOfSearchedBook = (bookOnChange, shelf) => state => {
+  let newBooks = state.booksInSearchResult.map(bookInSearchResult => {
+    if (bookInSearchResult.id === bookOnChange.id) {
+      bookInSearchResult.shelf = shelf;
+    }
+    return bookInSearchResult;
+  });
+  return { booksInSearchResult: newBooks };
+}

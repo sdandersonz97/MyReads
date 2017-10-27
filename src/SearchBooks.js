@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import BookList from "./BookList";
 import * as BooksAPI from "./BooksAPI";
 import PropTypes from "prop-types";
-
+import { changeShelfOfSearchedBook } from "./stateChanges";
 class SearchBooks extends Component {
   state = {
     query: "",
@@ -31,15 +31,7 @@ class SearchBooks extends Component {
     const { booksInSearchResult } = this.state;
     const { onShelfChange } = this.props;
     onShelfChange(bookOnChange, shelf);
-    this.setState(state => {
-      let newBooks = booksInSearchResult.map(bookInSearchResult => {
-        if (bookInSearchResult.id === bookOnChange.id) {
-          bookInSearchResult.shelf = shelf;
-        }
-        return bookInSearchResult;
-      });
-      return { booksInSearchResult: newBooks };
-    });
+    this.setState(changeShelfOfSearchedBook(bookOnChange, shelf));
   };
   render() {
     const { query, booksInSearchResult } = this.state;
