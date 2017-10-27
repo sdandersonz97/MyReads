@@ -5,6 +5,7 @@ import SearchBooks from "./SearchBooks";
 import { Route } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { filterByShelf, shelfs } from './utils/helpers';
+import { addNewBook, changeShelfOfBook } from './stateChanges';
 import BookList from "./BookList";
 
 class BooksApp extends React.Component {
@@ -14,27 +15,17 @@ class BooksApp extends React.Component {
       this.setState({ books })
     );
   }
-  addBookToState = newBook => this.setState(state => { books: state.books.push(newBook) });
   isTheBookNew = bookOnChange => {
     let is = false;
     if (bookOnChange.shelf === "none") {
-      this.addBookToState(bookOnChange)
+      this.setState(state => addNewBook(state, bookOnChange))
       is = true;
     }
     return is;
   };
   handleShelfChange = (bookOnChange, shelf) => {
-    if (!this.isTheBookNew(bookOnChange)) {
-      this.setState(state => {
-        let newBooks = state.books.map(book => {
-          if (bookOnChange.id === book.id) {
-            book.shelf = shelf;
-          }
-          return book;
-        });
-        return { books: newBooks };
-      });
-    }
+    !this.isTheBookNew(bookOnChange) &&
+      this.setState(state => changeShelfOfBook(state, bookOnChange, shelf));
     BooksAPI.update(bookOnChange, shelf);
   };
   render() {
