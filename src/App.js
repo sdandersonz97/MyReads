@@ -4,7 +4,7 @@ import "./App.css";
 import SearchBooks from "./SearchBooks";
 import { Route } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { filterByShelf } from './utils/helpers';
+import { filterByShelf, shelfs } from './utils/helpers';
 import BookList from "./BookList";
 
 class BooksApp extends React.Component {
@@ -58,21 +58,11 @@ class BooksApp extends React.Component {
               <div className="list-books-title">
                 <h1>MyReads</h1>
               </div>
-              <BookList
-                books={filterByShelf(books,'currentlyReading')}
-                onShelfChange={this.handleShelfChange}
-                shelfName="Currently Reading"
-              />
-              <BookList
-                books={filterByShelf(books,'wantToRead')}
-                onShelfChange={this.handleShelfChange}
-                shelfName="Want To Read"
-              />
-              <BookList
-                books={filterByShelf(books,'read')}
-                onShelfChange={this.handleShelfChange}
-                shelfName="Read"
-              />
+              {shelfs.map(shelf => 
+                <BookList 
+                  books={filterByShelf(books, shelf.shelfId)}
+                  onShelfChange={this.handleShelfChange}
+                  shelfName={shelf.shelfTitle} />)}
               <div className="open-search">
                 <Link to="/search">Add a book</Link>
               </div>
