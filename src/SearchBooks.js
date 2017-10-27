@@ -43,10 +43,11 @@ class SearchBooks extends Component {
   };
   render() {
     const { query, booksInSearchResult } = this.state;
+    const { onBack } = this.props
     return (
       <div className="search-books">
         <div className="search-books-bar">
-          <Link to="/" className="close-search">
+          <Link to="/mybooks" className="close-search" onClick={onBack}>
             Close
           </Link>
           <div className="search-books-input-wrapper">
@@ -71,7 +72,7 @@ class SearchBooks extends Component {
 }
 
 SearchBooks.propTypes = {
-  homePageBooks: PropTypes.array,
+  homePageBooks: PropTypes.object,
   onShelfChange: PropTypes.func
 };
 

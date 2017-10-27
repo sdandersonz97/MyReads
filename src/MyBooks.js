@@ -4,9 +4,12 @@ import * as BooksAPI from "./BooksAPI";
 import { addNewBook, changeShelfOfBook } from './stateChanges';
 import { filterByShelf, shelfs } from './utils/helpers';
 import { Link } from 'react-router-dom';
-
+import SearchBook from './SearchBooks';
 class MyBooks extends React.Component {
-    state = { books: [] };
+    state = { 
+      books: [],
+      isSearching: false, 
+    };
     componentDidMount() {
       BooksAPI.getAll().then(books =>
         this.setState({ books })
@@ -25,21 +28,36 @@ class MyBooks extends React.Component {
         this.setState(changeShelfOfBook(bookOnChange, shelf));
       BooksAPI.update(bookOnChange, shelf);
     };
+    onSearch = () => this.setState({ isSearching: true })
+    onBack = () => this.setState({ isSearching: false })
     render(){
-        const { books } = this.state
+        const { books, isSearching } = this.state
         return(
             <section>
-                <div className="list-books-title">
-                <h1>MyReads</h1>
-                </div>
-                {shelfs.map(shelf => 
-                  <BookList 
-                      books={filterByShelf(books, shelf.shelfId)}
-                      onShelfChange={this.handleShelfChange}
-                      shelfName={shelf.shelfTitle} />)}
-                <div className="open-search">
-                <Link to="/search">Add a book</Link>
-                </div>
+                {!isSearching 
+                ?(
+                  <div>
+                    <div className="list-books-title">
+                      <h1>MyReads</h1>
+                    </div>
+                    {shelfs.map(shelf => 
+                      <BookList 
+                          key={shelf.shelfId}
+                          books={filterByShelf(books, shelf.shelfId)}
+                          onShelfChange={this.handleShelfChange}
+                          shelfName={shelf.shelfTitle} />)}
+                    <div className="open-search">
+                      <Link to="/mybooks" onClick={this.onSearch}>Add a book</Link>
+                    </div>
+                  </div>)
+                : <SearchBook  
+                    booksOnHomePage={books}
+                    onShelfChange={this.handleShelfChange}
+                    onBack={this.onBack}
+                    />
+                }
+               
+
             </section>
         )
     }

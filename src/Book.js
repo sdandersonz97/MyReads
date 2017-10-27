@@ -35,5 +35,5 @@ export const Book = ({ book, onSelectChange }) => (
 );
 
 Book.propTypes = {
-  book: PropTypes.array
+  book: PropTypes.object.isRequired
 };
